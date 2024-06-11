@@ -21,12 +21,16 @@ const checkLogin = (username, password, callback) => {
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
+  console.log(`Login attempt with username: ${username} and password: ${password}`); // Log the login attempt
   checkLogin(username, password, (err, user) => {
     if (err) {
+      console.error(`Error during login: ${err}`);
       res.status(500).json({ message: 'Errore del server' });
     } else if (user) {
+      console.log('Login successful');
       res.status(200).json({ message: 'LOGIN EFFETTUATO' });
     } else {
+      console.log('Login failed');
       res.status(401).json({ message: 'LOGIN FALLITO' });
     }
   });
