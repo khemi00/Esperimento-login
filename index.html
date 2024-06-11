@@ -24,20 +24,29 @@
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            
+            console.log(`Submitting login for username: ${username}`); // Log the form submission
 
-            fetch('https://your-repo-owner.github.io/simple_login_app/login', {
+            fetch('/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ username, password })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log(`Response from server: ${JSON.stringify(data)}`); // Log the server response
                 document.getElementById('message').textContent = data.message;
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.getElementById('message').textContent = 'Errore durante il login';
             });
         });
     </script>
