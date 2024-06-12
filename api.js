@@ -8,17 +8,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const checkLogin = (username, password, callback) => {
-  const db = new sqlite3.Database('users.db');
-  db.get(`SELECT * FROM user WHERE username = ? AND password = ?`, [username, password], (err, row) => {
+  console.log('Connecting to database...');
+  const db = new sqlite3.Database('users.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
-      console.error('Database error:', err);
+      console.error('Could not connect to database', err);
       callback(err, null);
     } else {
-      console.log('Database query result:', row);
-      callback(null, row);
+      console.log('Connected to database');
+      db.get(`SELECT * FROM user WHERE username = ? AND password = ?`, [username, password], (err, row) => {
+        if (err) {
+          console.error('Error querying database', err);
+          callback(err, null);
+        } else {
+          console.log('Query result:', row);
+          callback(null, row);
+        }
+        db.close((err) => {
+          if (err) {
+            console.error('Error closing database connection', err);
+          } else {
+            console.log('Database connection closed');
+          }
+        });
+      });
     }
   });
-  db.close();
 };
 
 app.post('/login', (req, res) => {
