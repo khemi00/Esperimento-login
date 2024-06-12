@@ -24,8 +24,8 @@ let currentMap;
 
 function preload() {
     console.log("Preloading assets...");
-    this.load.image('mapEurope', '/public/mapEurope.png');
-    this.load.image('mapWorld', '/public/mapWorld.png');
+    this.load.image('mapEurope', '/public/assets/mapEurope.png');
+    this.load.image('mapWorld', '/public/assets/mapWorld.png');
 }
 
 function create() {
