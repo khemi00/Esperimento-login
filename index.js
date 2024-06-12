@@ -5,7 +5,7 @@ const db = require('./public/init_db');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Serve the index.html file at the root URL
 app.get('/', (req, res) => {
