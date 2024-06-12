@@ -13,11 +13,21 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     })
     .then(response => response.json())
     .then(data => {
+        const messageElement = document.createElement('div');
         if (data.success) {
-            alert('Login successful');
+            messageElement.className = 'alert alert-success mt-3';
+            messageElement.innerText = 'Login successful';
         } else {
-            alert('Login failed: ' + data.message);
+            messageElement.className = 'alert alert-danger mt-3';
+            messageElement.innerText = 'Login failed: ' + data.message;
         }
+        document.getElementById('loginForm').appendChild(messageElement);
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        const messageElement = document.createElement('div');
+        messageElement.className = 'alert alert-danger mt-3';
+        messageElement.innerText = 'An error occurred. Please try again later.';
+        document.getElementById('loginForm').appendChild(messageElement);
+    });
 });
