@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 
 const checkLogin = (username, password, callback) => {
   console.log('Connecting to database...');
-  const db = new sqlite3.Database('users.db', sqlite3.OPEN_READWRITE, (err) => {
+  const db = new sqlite3.Database('public/users.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
       console.error('Could not connect to database', err);
       callback(err, null);
@@ -43,7 +43,7 @@ const checkLogin = (username, password, callback) => {
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  console.log(`Login attempt with username: ${username} and password: ${password}`); // Log the login attempt
+  console.log(`Login attempt with username: ${username} and password: ${password}`);
   checkLogin(username, password, (err, user) => {
     if (err) {
       console.error('Error during login:', err);
