@@ -4,6 +4,8 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    console.log('Attempting login with', username, password);
+
     fetch('/login', {
         method: 'POST',
         headers: {
@@ -23,13 +25,11 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         if (data.success) {
             messageElement.className = 'alert alert-success mt-3';
             messageElement.innerText = 'Login successful';
-            document.getElementById('loginForm').appendChild(messageElement);
-            onLoginSuccess();
         } else {
             messageElement.className = 'alert alert-danger mt-3';
             messageElement.innerText = 'Login failed: ' + data.message;
-            document.getElementById('loginForm').appendChild(messageElement);
         }
+        document.getElementById('loginForm').appendChild(messageElement);
     })
     .catch(error => {
         console.error('Error:', error);
