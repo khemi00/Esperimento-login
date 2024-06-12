@@ -21,15 +21,14 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     })
     .then(data => {
         console.log('Server response:', data);
-        const messageElement = document.createElement('div');
         if (data.success) {
-            messageElement.className = 'alert alert-success mt-3';
-            messageElement.innerText = 'Login successful';
+            window.location.href = '/game';
         } else {
+            const messageElement = document.createElement('div');
             messageElement.className = 'alert alert-danger mt-3';
             messageElement.innerText = 'Login failed: ' + data.message;
+            document.getElementById('loginForm').appendChild(messageElement);
         }
-        document.getElementById('loginForm').appendChild(messageElement);
     })
     .catch(error => {
         console.error('Error:', error);
