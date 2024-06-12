@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const checkLogin = (username, password, callback) => {
-  const db = new sqlite3.Database('users.db');
+  const db = new sqlite3.Database('init_db.js');
   db.get(`SELECT * FROM user WHERE username = ? AND password = ?`, [username, password], (err, row) => {
     if (err) {
       console.error('Database error:', err);
