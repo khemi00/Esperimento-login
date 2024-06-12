@@ -12,6 +12,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Serve the game.html file when login is successful
+app.get('/game', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/game.html'));
+});
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     console.log('Received login request:', username, password);
