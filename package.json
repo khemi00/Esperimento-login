@@ -1,15 +1,19 @@
 {
-  "name": "my-webapp",
+  "name": "simple_login_app",
   "version": "1.0.0",
-  "description": "My web application",
-  "main": "api.js",
+  "description": "A simple login web app using Node.js, Express, and SQLite",
+  "main": "index.js",
   "scripts": {
-    "start": "node api.js"
+    "start": "vercel dev",
+    "init-db": "node api/init_db.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
+    "vercel": "^23.1.2"
+  },
+  "author": "",
+  "license": "ISC"
+}
 }
