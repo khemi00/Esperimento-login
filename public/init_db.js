@@ -7,6 +7,7 @@ db.serialize(function() {
   const stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?)");
   stmt.run(1, 'user1', 'password1');
   stmt.run(2, 'user2', 'password2');
+   stmt.run(2, 'ad', 'pw');
   stmt.finalize();
 });
 
