@@ -2,17 +2,17 @@
   "name": "simple_login_app",
   "version": "1.0.0",
   "description": "A simple login web app using Node.js, Express, and SQLite",
-  "main": "index.js",
+  "main": "api.js",
   "scripts": {
-    "start": "node api.js",  // aggiornato per usare api.js come main file
-    "init-db": "node public/init_db.js" // percorso corretto per init_db.js
+    "start": "node api.js",
+    "init-db": "node public/init_db.js"
   },
   "dependencies": {
-    "express": "^4.17.1", // aggiunto express
+    "express": "^4.17.1",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7" // rimosso vercel e aggiunto nodemon per sviluppo locale
+    "nodemon": "^2.0.7"
   },
   "author": "",
   "license": "ISC"
