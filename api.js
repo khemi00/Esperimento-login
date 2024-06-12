@@ -11,8 +11,10 @@ const checkLogin = (username, password, callback) => {
   const db = new sqlite3.Database('users.db');
   db.get(`SELECT * FROM user WHERE username = ? AND password = ?`, [username, password], (err, row) => {
     if (err) {
+      console.error('Database error:', err);
       callback(err, null);
     } else {
+      console.log('Database query result:', row);
       callback(null, row);
     }
   });
@@ -24,7 +26,7 @@ app.post('/login', (req, res) => {
   console.log(`Login attempt with username: ${username} and password: ${password}`); // Log the login attempt
   checkLogin(username, password, (err, user) => {
     if (err) {
-      console.error(`Error during login: ${err}`);
+      console.error('Error during login:', err);
       res.status(500).json({ message: 'Errore del server' });
     } else if (user) {
       console.log('Login successful');
