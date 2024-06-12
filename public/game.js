@@ -85,31 +85,28 @@ function create() {
         }
     });
 
-    // Gestisci il pulsante del menù
-    const menuButton = document.getElementById('menuButton');
-    const europeMapButton = document.getElementById('europeMapButton');
-    const worldMapButton = document.getElementById('worldMapButton');
+        // Gestisci il pulsante del menù
+    document.getElementById('menuButton').addEventListener('click', () => {
+        const menu = document.getElementById('menu');
+        if (menu.style.display === 'none') {
+            menu.style.display = 'flex';
+            document.getElementById('menuButton').textContent = 'X';
+        } else {
+            menu.style.display = 'none';
+            document.getElementById('menuButton').textContent = '☰';
+        }
+    });
 
-    if (menuButton) {
-        menuButton.addEventListener('click', () => {
-            const menu = document.getElementById('menu');
-            if (menu.style.display === 'none') {
-                menu.style.display = 'flex';
-                menuButton.textContent = 'X';
-            } else {
-                menu.style.display = 'none';
-                menuButton.textContent = '☰';
-            }
-        });
-    }
+      // Aggiungi logica per cambiare mappa
+    document.getElementById('worldMapButton').addEventListener('click', () => {
+        changeMap('mapWorld');
+    });
 
-    // Aggiungi logica per cambiare mappa
-    if (europeMapButton) {
-        europeMapButton.addEventListener('click', () => {
-            console.log("Europe map button clicked");
-            changeMap.call(this, 'mapEurope');
-        });
-    }
+    document.getElementById('europeMapButton').addEventListener('click', () => {
+        changeMap('mapEurope');
+    });
+
+}
 
     if (worldMapButton) {
         worldMapButton.addEventListener('click', () => {
@@ -138,23 +135,15 @@ function update() {
 
 function changeMap(mapKey) {
     console.log("Changing map to", mapKey);
-    if (currentMap) {
-        currentMap.setTexture(mapKey); // Cambia la texture dell'immagine esistente
-        updateMapBounds(currentMap);
-    } else {
-        console.error("Current map is not defined");
-    }
+    currentMap.setTexture(mapKey); // Cambia la texture dell'immagine esistente
+    updateMapBounds(currentMap);
 }
 
 function updateMapBounds(map) {
-    if (map) {
-        const mapWidth = map.width;
-        const mapHeight = map.height;
-        console.log("Map dimensions:", mapWidth, mapHeight);
+    const mapWidth = map.width;
+    const mapHeight = map.height;
+    console.log("Map dimensions:", mapWidth, mapHeight);
 
-        // Imposta le dimensioni del mondo per adattarsi alla mappa
-        game.scene.scenes[0].cameras.main.setBounds(0, 0, mapWidth, mapHeight);
-    } else {
-        console.error("Map is not defined");
-    }
+    // Imposta le dimensioni del mondo per adattarsi alla mappa
+    game.scene.scenes[0].cameras.main.setBounds(0, 0, mapWidth, mapHeight);
 }
