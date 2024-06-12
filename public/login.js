@@ -4,6 +4,8 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    console.log('Attempting login with', username, password);
+
     fetch('/login', {
         method: 'POST',
         headers: {
@@ -11,8 +13,14 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         },
         body: JSON.stringify({ username, password })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { throw err; });
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log('Server response:', data);
         const messageElement = document.createElement('div');
         if (data.success) {
             messageElement.className = 'alert alert-success mt-3';
