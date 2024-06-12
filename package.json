@@ -1,0 +1,17 @@
+{
+  "name": "simple_login_app",
+  "version": "1.0.0",
+  "description": "A simple login web app using Node.js, Express, and SQLite",
+  "main": "api.js",
+  "scripts": {
+    "start": "node api.js",
+    "init-db": "node init_db.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
